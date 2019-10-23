@@ -21,12 +21,15 @@ public class ApiTest {
                 .when()
                 .get(baseUrl)
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .log().body();
     }
 
     @Test
     public void rootResponseShouldContainProfileLink() {
-        String relHref = client.discovery().getRelHref("profile");
+        String relHref = client
+                .discovery()
+                .log().getRelHref("profile");
         assertEquals(baseUrl + "/profile", relHref);
     }
 }
